@@ -1,24 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MatheWelt</title>
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="stylesheet.css">
-    
-  </head>
-  <body>
-    <center>
-      <h1 style="color:green;">Mathe Welt</h1>
-      <p>Das Spiel, um Mathe zu lernen!</p>
-      <p>Frage:</p>
-      <p>Wie viel ist</p>
-      <p id="num_1"></p>
-      <p id="sign"></p>
-      <p id="num_2"></p>
-      <p>Die Quadratwurzel von -1</p>
-      <br>
-      <p>Made by redric11, MrNerdastic & Germanex3000</p>
-    </center>
-    
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Mathe Welt - Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .quiz-container {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: inline-block;
+            text-align: left;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Mathe Welt - Quiz</h1>
+        <div class="question">
+            <p id="question-text"></p>
+        </div>
+        <div class="options" id="options">
+            <label class="option">
+                <input type="radio" name="answer" value="A"> <span id="optionA"></span>
+            </label><br>
+            <label class="option">
+                <input type="radio" name="answer" value="B"> <span id="optionB"></span>
+            </label><br>
+            <label class="option">
+                <input type="radio" name="answer" value="C"> <span id="optionC"></span>
+            </label><br>
+        </div>
+        <button onclick="checkAnswer()">Submit</button>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is 2 + 2?",
+                options: {
+                    A: "3",
+                    B: "4",
+                    C: "5"
+                },
+                correctAnswer: "B"
+            },
+            {
+                question: "What is 3 * 5?",
+                options: {
+                    A: "10",
+                    B: "15",
+                    C: "20"
+                },
+                correctAnswer: "B"
+            },
+            {
+                question: "What is 10 / 2?",
+                options: {
+                    A: "2",
+                    B: "5",
+                    C: "10"
+                },
+                correctAnswer: "B"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question-text").textContent = currentQuestion.question;
+            document.getElementById("optionA").textContent = currentQuestion.options.A;
+            document.getElementById("optionB").textContent = currentQuestion.options.B;
+            document.getElementById("optionC").textContent = currentQuestion.options.C;
+        }
+
+        function checkAnswer() {
+            const selectedAnswer = document.querySelector("input[name='answer']:checked");
+            if (!selectedAnswer) {
+                alert("Please select an answer.");
+                return;
+            }
+            if (selectedAnswer.value === questions[currentQuestionIndex].correctAnswer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                alert(`Quiz finished! Your score is ${score} out of ${questions.length}`);
+                document.getElementById("score").textContent = score;
+                document.querySelector("button").disabled = true;
+            }
+        }
+
+        displayQuestion();
+    </script>
+</body>
 </html>
