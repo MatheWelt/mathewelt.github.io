@@ -107,6 +107,12 @@
             if (selectedAnswer.value === questions[currentQuestionIndex].correctAnswer) {
                 score++;
             }
+            else
+            {
+                score = 0;
+                currenQuestionIndex = 0;
+                alert("Das war falsch!");
+            }
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.length) {
                 displayQuestion();
