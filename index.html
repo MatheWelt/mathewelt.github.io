@@ -109,8 +109,6 @@
             }
             else
             {
-                score = 0;
-                currenQuestionIndex = 0;
                 alert("Das war falsch!");
             }
             currentQuestionIndex++;
@@ -120,6 +118,8 @@
                 alert(`Quiz finished! Your score is ${score} out of ${questions.length}`);
                 document.getElementById("score").textContent = score;
                 document.querySelector("button").disabled = true;
+                score = 0;
+                currentQuestionIndex = 0;
             }
         }
 
